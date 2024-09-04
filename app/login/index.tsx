@@ -1,4 +1,5 @@
 import Colors from "@/constants/Colors";
+import { Href, Link } from "expo-router";
 import { View, Text, Image, Pressable } from "react-native";
 
 export default function LoginScreen() {
@@ -29,7 +30,12 @@ export default function LoginScreen() {
             borderRadius: 14,
           }}
         >
-          <Text style={{ fontSize: 20, textAlign: "center" }}>Get Started</Text>
+          <Link
+            href={"/(tabs)/home" as unknown as Href<string | object>}
+            style={{ fontSize: 20, textAlign: "center" }}
+          >
+            <Text>Get Started</Text>
+          </Link>
         </Pressable>
       </View>
     </View>
