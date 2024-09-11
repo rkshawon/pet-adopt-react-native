@@ -1,9 +1,6 @@
 import React from "react";
 import { View, Image, FlatList, Dimensions, StyleSheet } from "react-native";
 
-// Get the window width
-const { width } = Dimensions.get("window");
-
 // Dummy data with image paths
 const data = [
   { id: "1", text: "Slide 1", image: require("../../assets/images/login.png") },
