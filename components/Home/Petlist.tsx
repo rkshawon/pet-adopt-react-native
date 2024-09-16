@@ -6,34 +6,26 @@ import {
   TouchableWithoutFeedback,
   Image,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 
 const data = [
   { id: "1", text: "Slide 1", image: require("../../assets/images/img1.webp") },
-  {
-    id: "10",
-    text: "Slide 10",
-    image: require("../../assets/images/img1.webp"),
-  },
-  // { id: "2", text: "Slide 2", image: require("../../assets/images/img2.png") },
-  // { id: "3", text: "Slide 3", image: require("../../assets/images/img3.jpg") },
-  // { id: "4", text: "Slide 4", image: require("../../assets/images/img4.webp") },
-  // { id: "5", text: "Slide 5", image: require("../../assets/images/img2.png") },
-  // { id: "6", text: "Slide 6", image: require("../../assets/images/img3.jpg") },
-  // { id: "7", text: "Slide 7", image: require("../../assets/images/login.png") },
-  // { id: "8", text: "Slide 8", image: require("../../assets/images/img1.webp") },
+  { id: "2", text: "Slide 2", image: require("../../assets/images/img2.png") },
+  { id: "3", text: "Slide 3", image: require("../../assets/images/img3.jpg") },
+  { id: "4", text: "Slide 4", image: require("../../assets/images/img4.webp") },
 ];
+
+const { height } = Dimensions.get("window");
 
 export default function Petlist() {
   const [selectedItem, setSelectedItem] = useState("1");
 
   const renderItem = ({ item }: any) => {
-    console.log(item);
     return (
       <TouchableWithoutFeedback onPress={() => setSelectedItem(item.id)}>
-        <View style={{ height: 500 }}>
-          <Text>{item.text}</Text>
-          <Image source={item.image} />
+        <View style={styles.itemContainer}>
+          <Image source={item.image} style={styles.image} />
         </View>
       </TouchableWithoutFeedback>
     );
@@ -41,11 +33,13 @@ export default function Petlist() {
 
   return (
     <View style={styles.container}>
-      <Text>Petlist</Text>
+      <Text style={styles.header}>Petlist</Text>
       <FlatList
         data={data}
+        numColumns={2}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.flatListContent}
       />
     </View>
   );
@@ -53,21 +47,25 @@ export default function Petlist() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "red",
-    height: "100%",
-    paddingTop: 20,
+    height: height * 0.9,
+    paddingHorizontal: 10,
   },
   header: {
+    fontWeight: "500",
     fontSize: 20,
     marginBottom: 10,
-    textAlign: "center",
+  },
+  flatListContent: {
+    paddingBottom: 20,
   },
   itemContainer: {
-    marginBottom: 20,
+    flex: 1,
     alignItems: "center",
+    margin: 10,
   },
   image: {
-    width: 500,
-    height: 500,
+    width: 150,
+    height: 100,
+    borderRadius: 5,
   },
 });
